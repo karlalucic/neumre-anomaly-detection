@@ -1,0 +1,12 @@
+torch
+torchvision
+numpy
+pillow
+matplotlib
+scikit-learn
+pandas
+tqdm
+kaggle
+# Needed by the kaggle package at import time, but not always installed with it.
+six
+jupyter
