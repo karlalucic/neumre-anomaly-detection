@@ -54,7 +54,8 @@ We train in Kaggle Notebooks, so no download is needed:
    !pip install -q -r requirements.txt
    ```
 
-3. Use the attached folder as the dataset folder instead of `data/mvtec_ad`.
+3. Use the attached folder as the dataset folder instead of `data/mvtec_ad`
+   (for example `--root` in `scripts/verify_data.py`).
 
 Save checkpoints and results under `/kaggle/working/`. That folder is kept
 when the notebook version is saved.
@@ -86,6 +87,20 @@ The script downloads the full archive once (about 5 GB), extracts only bottle,
 hazelnut and tile into `data/mvtec_ad/<category>/` and deletes the archive.
 You need about 6 GB of free disk space during the download. Categories that
 are already present are skipped, so the script is safe to run again.
+
+### Check the data
+
+After downloading (or after attaching the dataset on Kaggle), check that all
+images and masks are there:
+
+```bash
+python scripts/verify_data.py                                          # data/mvtec_ad
+python scripts/verify_data.py --root /kaggle/input/datasets/ipythonx/mvtec-ad  # Kaggle
+```
+
+The script counts images per category and split, compares them with the
+numbers from the dataset paper and checks that every defective test image has
+a ground truth mask. It exits with a non-zero status if anything is missing.
 
 ### Credit
 
