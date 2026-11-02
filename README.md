@@ -45,7 +45,7 @@ We train in Kaggle Notebooks, so no download is needed:
 
 1. In the notebook, click *Add Input* and add the dataset
    `ipythonx/mvtec-ad`. It appears under `/kaggle/input/` (for example
-   `/kaggle/input/mvtec-ad/bottle/`).
+   `/kaggle/input/datasets/ipythonx/mvtec-ad/bottle/`).
 2. Turn on *Internet* in the notebook settings, then get the code:
 
    ```bash
