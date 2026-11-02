@@ -35,8 +35,59 @@ reports/      project report and presentation
 
 ## Data
 
-The dataset is downloaded with a script, see `scripts/download_data.py`
-(added in a later step). Images are never committed to this repository.
+We use the Kaggle copy of the dataset,
+[ipythonx/mvtec-ad](https://www.kaggle.com/datasets/ipythonx/mvtec-ad).
+Images and archives are never committed to this repository.
+
+### On Kaggle Notebooks (main setup)
+
+We train in Kaggle Notebooks, so no download is needed:
+
+1. In the notebook, click *Add Input* and add the dataset
+   `ipythonx/mvtec-ad`. It appears under `/kaggle/input/` (for example
+   `/kaggle/input/mvtec-ad/bottle/`).
+2. Turn on *Internet* in the notebook settings, then get the code:
+
+   ```bash
+   !git clone https://github.com/karlalucic/neumre-anomaly-detection.git
+   %cd neumre-anomaly-detection
+   !pip install -q -r requirements.txt
+   ```
+
+3. Use the attached folder as the dataset folder instead of `data/mvtec_ad`.
+
+Save checkpoints and results under `/kaggle/working/`. That folder is kept
+when the notebook version is saved.
+
+### Locally or on Colab
+
+Use `scripts/download_data.py`. It needs a Kaggle API token.
+
+#### 1. Get a Kaggle API token
+
+1. Log in to [kaggle.com](https://www.kaggle.com) and open
+   *Settings → API*.
+2. Click *Create New Token*. Depending on the page, you get either a
+   `kaggle.json` file or a token string.
+3. Store it in one of these places (never inside this repository):
+   - `kaggle.json`: move it to `~/.kaggle/kaggle.json` and run
+     `chmod 600 ~/.kaggle/kaggle.json`.
+   - Token string: save it to `~/.kaggle/access_token`, or set
+     `export KAGGLE_API_TOKEN=<token>`.
+   - Or set `export KAGGLE_USERNAME=<username>` and `export KAGGLE_KEY=<key>`.
+
+#### 2. Download
+
+```bash
+python scripts/download_data.py
+```
+
+The script downloads the full archive once (about 5 GB), extracts only bottle,
+hazelnut and tile into `data/mvtec_ad/<category>/` and deletes the archive.
+You need about 6 GB of free disk space during the download. Categories that
+are already present are skipped, so the script is safe to run again.
+
+### Credit
 
 We use the MVTec AD dataset:
 
